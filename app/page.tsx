@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { DownloadButton } from "./components/DownloadButton";
+import { MotionObserver } from "./components/MotionObserver";
 
 const INSTAGRAM_URL =
   "https://www.instagram.com/where_dreamslive?igsi=MWRkdDZoMXpwOWZwYg%3D%3D&utm_source=qr";
@@ -23,6 +24,7 @@ const previewPages = [
 export default function Home() {
   return (
     <main>
+      <MotionObserver />
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Where Dreams Live home">
           <span className="brand-mark">
@@ -67,27 +69,45 @@ export default function Home() {
       </section>
 
       <section className="editor-letter paper-section" id="letter">
-        <div className="section-index">01</div>
-        <div className="letter-heading">
-          <p className="eyebrow eyebrow--dark">A letter from the editor</p>
-          <h2>For stories that finally have somewhere to go.</h2>
+        <div className="letter-body">
+          <div className="letter-heading" data-reveal="up">
+            <span className="section-index">01</span>
+            <p className="eyebrow eyebrow--dark">A letter from the editor</p>
+            <h2>For stories that finally have somewhere to go.</h2>
+          </div>
+          <div className="letter-copy" data-reveal="up">
+            <p className="drop-cap">
+              This magazine began as a whisper of an idea, while I clung to that
+              little girl who discovered the beauty in writing.
+            </p>
+            <p>
+              The first theme, “Becoming,” felt right for a first issue. Everyone
+              has a story that aligns with this theme, and every writer featured
+              here brought a special version of themselves.
+            </p>
+            <p className="signature">With gratitude,<br /><em>Adeosun Oluwatunmise Ifeoluwa</em></p>
+          </div>
         </div>
-        <div className="letter-copy">
-          <p className="drop-cap">
-            This magazine began as a whisper of an idea, while I clung to that
-            little girl who discovered the beauty in writing.
-          </p>
-          <p>
-            The first theme, “Becoming,” felt right for a first issue. Everyone
-            has a story that aligns with this theme, and every writer featured
-            here brought a special version of themselves.
-          </p>
-          <p className="signature">With gratitude,<br /><em>Adeosun Oluwatunmise Ifeoluwa</em></p>
-        </div>
+        <figure className="editor-portrait" data-reveal="portrait">
+          <div className="portrait-media">
+            <Image
+              src="/magazine/editor-portrait.jpg"
+              alt="Adeosun Oluwatunmise Ifeoluwa, editor of Where Dreams Live"
+              width={4024}
+              height={5030}
+              sizes="(max-width: 760px) 100vw, 50vw"
+            />
+          </div>
+          <blockquote>“A whisper<br />of an idea.”</blockquote>
+          <figcaption>
+            <span>Adeosun Oluwatunmise Ifeoluwa</span>
+            <span>Editor &amp; creator</span>
+          </figcaption>
+        </figure>
       </section>
 
       <section className="contents-section" id="inside">
-        <div className="contents-intro">
+        <div className="contents-intro" data-reveal="up">
           <p className="eyebrow">Inside Issue 01</p>
           <h2>Words in the<br />middle of becoming.</h2>
           <p>
@@ -95,7 +115,7 @@ export default function Home() {
             stories — gathered into one generous first issue.
           </p>
         </div>
-        <ol className="contents-list">
+        <ol className="contents-list" data-reveal="list">
           {issueSections.map((section) => (
             <li key={section.number}>
               <span>{section.number}</span>
@@ -107,7 +127,7 @@ export default function Home() {
       </section>
 
       <section className="featured-section">
-        <div className="featured-art">
+        <div className="featured-art" data-reveal="left">
           <span className="vertical-caption">Featured poem · page 02</span>
           <Image
             src="/magazine/featured-fly.jpg"
@@ -116,7 +136,7 @@ export default function Home() {
             height={1020}
           />
         </div>
-        <div className="featured-copy">
+        <div className="featured-copy" data-reveal="up">
           <p className="eyebrow eyebrow--dark">Featured poem · Fly</p>
           <blockquote>
             “You take what seems to be your first breath,<br />
@@ -129,11 +149,11 @@ export default function Home() {
       </section>
 
       <section className="winners-section">
-        <div className="winners-heading">
+        <div className="winners-heading" data-reveal="up">
           <p className="eyebrow">The top three entries</p>
           <h2>Three voices.<br />Three forms.<br />One theme.</h2>
         </div>
-        <div className="winner-list">
+        <div className="winner-list" data-reveal="list">
           <article>
             <span>1st · Poetry</span>
             <h3>Becoming Me Beyond the Mirror</h3>
@@ -153,12 +173,12 @@ export default function Home() {
       </section>
 
       <section className="preview-section" aria-labelledby="preview-title">
-        <div className="preview-heading">
+        <div className="preview-heading" data-reveal="up">
           <p className="eyebrow eyebrow--dark">A look inside</p>
           <h2 id="preview-title">Made to be lingered over.</h2>
           <p>Three forms of storytelling, held together by the quiet work of becoming.</p>
         </div>
-        <div className="page-fan">
+        <div className="page-fan" data-reveal="fan">
           {previewPages.map((page, index) => (
             <Image
               key={page.src}
@@ -173,10 +193,10 @@ export default function Home() {
       </section>
 
       <section className="about-section" id="about">
-        <div className="about-mark" aria-hidden="true">
+        <div className="about-mark" aria-hidden="true" data-reveal="scale">
           <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
         </div>
-        <div className="about-copy">
+        <div className="about-copy" data-reveal="up">
           <p className="eyebrow">Why Where Dreams Live exists</p>
           <h2>A home for the words you almost kept to yourself.</h2>
           <p>
@@ -191,9 +211,11 @@ export default function Home() {
       </section>
 
       <section className="final-cta">
-        <p className="eyebrow">Issue 01 · Becoming</p>
-        <h2>Start reading.<br />See what stays.</h2>
-        <DownloadButton compact />
+        <div className="final-cta-content" data-reveal="up">
+          <p className="eyebrow">Issue 01 · Becoming</p>
+          <h2>Start reading.<br />See what stays.</h2>
+          <DownloadButton compact />
+        </div>
       </section>
 
       <footer>
