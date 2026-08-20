@@ -88,7 +88,7 @@ export default function Home() {
             <p className="signature">With gratitude,<br /><em>Adeosun Oluwatunmise Ifeoluwa</em></p>
           </div>
         </div>
-        <div className="editor-visual" data-reveal="portrait">
+        <div className="editor-visual">
           <div className="portrait-petal" aria-hidden="true">
             <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
           </div>
@@ -100,6 +100,7 @@ export default function Home() {
                 width={4024}
                 height={5030}
                 sizes="(max-width: 760px) 82vw, 30vw"
+                priority
               />
             </div>
             <blockquote>“A whisper<br />of an idea.”</blockquote>
