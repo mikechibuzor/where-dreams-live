@@ -25,6 +25,9 @@ export default function Home() {
   return (
     <main>
       <MotionObserver />
+      <div className="scroll-progress" aria-hidden="true">
+        <span />
+      </div>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Where Dreams Live home">
           <span className="brand-mark">
@@ -51,7 +54,7 @@ export default function Home() {
           <DownloadButton />
         </div>
 
-        <div className="cover-stage">
+        <div className="cover-stage" data-tilt>
           <div className="cover-orbit cover-orbit--one" />
           <div className="cover-orbit cover-orbit--two" />
           <Image
@@ -91,8 +94,8 @@ export default function Home() {
           <div className="portrait-petal" aria-hidden="true">
             <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
           </div>
-          <figure className="editor-portrait">
-            <div className="portrait-media">
+          <figure className="editor-portrait" id="editor-portrait">
+            <div className="portrait-media" data-tilt>
               <Image
                 src="/magazine/editor-portrait.jpg"
                 alt="Adeosun Oluwatunmise Ifeoluwa, editor of Where Dreams Live"
@@ -129,36 +132,20 @@ export default function Home() {
         </ol>
       </section>
 
-      <section className="featured-section" aria-labelledby="featured-title">
+      <section
+        className="featured-section"
+        id="featured-poem"
+        aria-labelledby="featured-title"
+      >
         <div className="featured-art" data-reveal="left" aria-hidden="true">
-          <span className="vertical-caption">A featured poem · page 02</span>
-          <span className="poem-orbit poem-orbit--outer" />
-          <span className="poem-orbit poem-orbit--inner" />
-          <div className="poem-keepsake">
-            <div className="poem-keepsake__topline">
-              <span>Where Dreams Live</span>
-              <span>02</span>
-            </div>
-            <span className="poem-keepsake__title">Fly</span>
-            <div className="poem-keepsake__seal">
-              <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
-            </div>
-            <div className="poem-keepsake__footer">
-              <span>Kept inside</span>
-              <span>Issue 01</span>
-            </div>
+          <div className="featured-petal">
+            <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
           </div>
         </div>
         <div className="featured-copy" data-reveal="up">
           <p className="eyebrow eyebrow--dark">In Issue 01 · Page 02</p>
           <h2 id="featured-title">A featured poem<br />by the Creator</h2>
-          <p className="featured-poem-name"><span>The poem</span> Fly</p>
-          <p className="featured-summary">
-            <em>Fly</em> waits inside the issue, unexcerpted and exactly where it
-            belongs. Meet it on page 02, in full and in context.
-          </p>
-          <p className="byline">Written by Adeosun Oluwatunmise</p>
-          <DownloadButton compact className="featured-download" />
+          <p className="featured-poem-label">The poem</p>
         </div>
       </section>
 
@@ -191,7 +178,12 @@ export default function Home() {
           <p className="eyebrow eyebrow--dark">A look inside</p>
           <h2 id="preview-title">Three forms of story telling</h2>
         </div>
-        <div className="page-fan" data-reveal="fan">
+        <div
+          className="page-fan"
+          data-reveal="fan"
+          data-tilt
+          data-tilt-strength="soft"
+        >
           {previewPages.map((page, index) => (
             <Image
               key={page.src}
