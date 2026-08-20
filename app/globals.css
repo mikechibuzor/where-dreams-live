@@ -181,13 +181,15 @@ h1 {
 
 .paper-section { background: var(--paper); color: var(--violet-deep); }
 .editor-letter {
+  align-items: center;
   display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(480px, 1.08fr);
-  min-height: 900px;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 30%);
+  min-height: 820px;
   overflow: hidden;
+  padding-right: 5vw;
   position: relative;
 }
-.letter-body { align-self: center; padding: clamp(90px, 10vw, 150px) clamp(55px, 7vw, 110px) clamp(90px, 10vw, 150px) 9vw; }
+.letter-body { align-self: center; padding: clamp(90px, 9vw, 140px) clamp(50px, 6vw, 96px) clamp(90px, 9vw, 140px) 9vw; }
 .letter-heading { max-width: 680px; }
 .section-index { color: var(--violet); display: block; font-family: var(--serif); font-size: 18px; margin-bottom: clamp(52px, 6vw, 90px); }
 .letter-heading h2, .contents-intro h2, .winners-heading h2, .preview-heading h2, .about-copy h2, .final-cta h2 {
@@ -200,8 +202,50 @@ h1 {
 .letter-copy p { margin: 0 0 24px; }
 .drop-cap::first-letter { color: var(--violet); float: left; font-size: 68px; line-height: .76; padding: 8px 10px 0 0; }
 .signature { color: var(--violet); font-size: 15px; padding-top: 10px; }
-.editor-portrait { align-self: stretch; margin: 0; min-height: 900px; overflow: hidden; position: relative; }
-.portrait-media { inset: 0; overflow: hidden; position: absolute; }
+.editor-visual { align-items: center; display: flex; justify-content: center; min-height: 620px; position: relative; }
+.portrait-petal {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  left: 50%;
+  opacity: .09;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(-56%, -50%) rotate(-12deg) scale(1.22);
+  width: min(36vw, 540px);
+}
+.portrait-petal img { height: 100%; object-fit: cover; transform: scale(1.09); width: 100%; }
+.editor-portrait {
+  aspect-ratio: 1;
+  margin: 0;
+  max-width: 390px;
+  position: relative;
+  width: 100%;
+}
+.editor-portrait::before {
+  animation: portrait-orbit 18s linear infinite;
+  border: 1px solid rgba(112,68,163,.34);
+  border-left-color: transparent;
+  border-radius: 50%;
+  border-right-color: transparent;
+  content: "";
+  inset: -22px;
+  pointer-events: none;
+  position: absolute;
+}
+.editor-portrait::after {
+  background: var(--violet);
+  border: 5px solid var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(112,68,163,.25);
+  content: "";
+  height: 13px;
+  position: absolute;
+  right: 7%;
+  top: 3%;
+  width: 13px;
+}
+.portrait-media { border: 8px solid rgba(255,255,255,.72); border-radius: 50%; box-shadow: 0 28px 70px rgba(43,13,70,.19); inset: 0; overflow: hidden; position: absolute; }
 .portrait-media::after {
   background: linear-gradient(180deg, rgba(245,240,246,.08) 0%, transparent 42%, rgba(25,12,31,.18) 100%);
   content: "";
@@ -212,23 +256,23 @@ h1 {
 .portrait-media img {
   height: 100%;
   object-fit: cover;
-  object-position: center 54%;
-  transform: scale(1.02);
+  object-position: center 30%;
+  transform: scale(1.08);
   transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
   width: 100%;
 }
-.editor-portrait:hover .portrait-media img { transform: scale(1.055) translateY(-8px); }
+.editor-portrait:hover .portrait-media img { transform: scale(1.13) translateY(-5px); }
 .editor-portrait blockquote {
   color: var(--violet-deep);
   font-family: var(--serif);
-  font-size: clamp(46px, 5vw, 82px);
+  font-size: clamp(30px, 2.8vw, 46px);
   letter-spacing: -.05em;
   line-height: .86;
   margin: 0;
   position: absolute;
-  right: 8%;
+  right: -2%;
   text-align: right;
-  top: 9%;
+  top: -29%;
 }
 .editor-portrait blockquote::before {
   background: var(--violet);
@@ -241,20 +285,20 @@ h1 {
 }
 .editor-portrait:hover blockquote::before { width: 100px; }
 .editor-portrait figcaption {
-  align-items: flex-end;
-  bottom: 32px;
-  color: var(--paper);
+  align-items: center;
+  bottom: -75px;
+  color: var(--violet-deep);
   display: flex;
   font-size: 8px;
   justify-content: space-between;
-  left: 34px;
+  left: 8px;
   letter-spacing: .16em;
   position: absolute;
-  right: 34px;
-  text-shadow: 0 1px 15px rgba(0,0,0,.38);
+  right: 8px;
   text-transform: uppercase;
 }
-.editor-portrait figcaption span:last-child { opacity: .72; }
+.editor-portrait figcaption span:first-child { max-width: 210px; }
+.editor-portrait figcaption span:last-child { opacity: .52; }
 
 .contents-section {
   background: linear-gradient(156deg, #34104f 0%, #251033 55%, #071b1a 100%);
@@ -398,6 +442,7 @@ footer p:last-child { justify-self: end; }
   to { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
 }
 @keyframes orbit-drift { to { transform: rotate(360deg); } }
+@keyframes portrait-orbit { to { transform: rotate(360deg); } }
 @keyframes line-breathe {
   0%, 100% { opacity: .45; transform: scaleX(.6); }
   50% { opacity: 1; transform: scaleX(1); }
@@ -451,14 +496,16 @@ footer p:last-child { justify-self: end; }
   .cover-stage { max-width: 330px; }
   .scroll-cue { display: none; }
 
-  .editor-letter { display: flex; flex-direction: column; min-height: 0; }
+  .editor-letter { display: flex; flex-direction: column; min-height: 0; padding-right: 0; }
   .letter-body { padding: 88px 7vw 82px; }
   .section-index { margin-bottom: 60px; }
   .letter-heading h2, .contents-intro h2, .winners-heading h2, .preview-heading h2, .about-copy h2 { font-size: clamp(46px, 14vw, 70px); }
   .letter-copy { padding-top: 48px; }
-  .editor-portrait { min-height: 720px; }
-  .editor-portrait blockquote { font-size: clamp(48px, 14vw, 66px); right: 7vw; top: 7%; }
-  .editor-portrait figcaption { align-items: flex-start; bottom: 22px; flex-direction: column; gap: 7px; left: 7vw; right: 7vw; }
+  .editor-visual { min-height: 560px; padding: 95px 10vw 125px; width: 100%; }
+  .portrait-petal { transform: translate(-54%, -50%) rotate(-12deg) scale(1.18); width: min(105vw, 470px); }
+  .editor-portrait { max-width: 350px; min-height: 0; }
+  .editor-portrait blockquote { font-size: clamp(31px, 9vw, 42px); right: -1%; top: -25%; }
+  .editor-portrait figcaption { align-items: flex-start; bottom: -72px; flex-direction: column; gap: 7px; left: 8px; right: 8px; }
 
   .contents-section, .winners-section { display: block; padding: 90px 7vw; }
   .contents-list, .winner-list { margin-top: 60px; }

@@ -88,22 +88,27 @@ export default function Home() {
             <p className="signature">With gratitude,<br /><em>Adeosun Oluwatunmise Ifeoluwa</em></p>
           </div>
         </div>
-        <figure className="editor-portrait" data-reveal="portrait">
-          <div className="portrait-media">
-            <Image
-              src="/magazine/editor-portrait.jpg"
-              alt="Adeosun Oluwatunmise Ifeoluwa, editor of Where Dreams Live"
-              width={4024}
-              height={5030}
-              sizes="(max-width: 760px) 100vw, 50vw"
-            />
+        <div className="editor-visual" data-reveal="portrait">
+          <div className="portrait-petal" aria-hidden="true">
+            <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
           </div>
-          <blockquote>“A whisper<br />of an idea.”</blockquote>
-          <figcaption>
-            <span>Adeosun Oluwatunmise Ifeoluwa</span>
-            <span>Editor &amp; creator</span>
-          </figcaption>
-        </figure>
+          <figure className="editor-portrait">
+            <div className="portrait-media">
+              <Image
+                src="/magazine/editor-portrait.jpg"
+                alt="Adeosun Oluwatunmise Ifeoluwa, editor of Where Dreams Live"
+                width={4024}
+                height={5030}
+                sizes="(max-width: 760px) 82vw, 30vw"
+              />
+            </div>
+            <blockquote>“A whisper<br />of an idea.”</blockquote>
+            <figcaption>
+              <span>Adeosun Oluwatunmise Ifeoluwa</span>
+              <span>Editor &amp; creator</span>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section className="contents-section" id="inside">
