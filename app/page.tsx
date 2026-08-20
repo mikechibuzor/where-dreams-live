@@ -34,7 +34,6 @@ export default function Home() {
         </a>
         <nav className="site-nav" aria-label="Main navigation">
           <a href="#inside">Inside the issue</a>
-          <a href="#about">Our story</a>
           <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram ↗</a>
         </nav>
         <span className="issue-label">Issue 01 · August 2026</span>
@@ -130,32 +129,43 @@ export default function Home() {
         </ol>
       </section>
 
-      <section className="featured-section">
-        <div className="featured-art" data-reveal="left">
-          <span className="vertical-caption">Featured poem · page 02</span>
-          <Image
-            src="/magazine/featured-fly.jpg"
-            alt="Fly, the featured poem by Adeosun Oluwatunmise"
-            width={720}
-            height={1020}
-          />
+      <section className="featured-section" aria-labelledby="featured-title">
+        <div className="featured-art" data-reveal="left" aria-hidden="true">
+          <span className="vertical-caption">A featured poem · page 02</span>
+          <span className="poem-orbit poem-orbit--outer" />
+          <span className="poem-orbit poem-orbit--inner" />
+          <div className="poem-keepsake">
+            <div className="poem-keepsake__topline">
+              <span>Where Dreams Live</span>
+              <span>02</span>
+            </div>
+            <span className="poem-keepsake__title">Fly</span>
+            <div className="poem-keepsake__seal">
+              <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
+            </div>
+            <div className="poem-keepsake__footer">
+              <span>Kept inside</span>
+              <span>Issue 01</span>
+            </div>
+          </div>
         </div>
         <div className="featured-copy" data-reveal="up">
-          <p className="eyebrow eyebrow--dark">Featured poem · Fly</p>
-          <blockquote>
-            “You take what seems to be your first breath,<br />
-            a new layer of skin on you.<br />
-            You test your wings, once, twice.<br />
-            Then you fly.”
-          </blockquote>
-          <p className="byline">By Adeosun Oluwatunmise</p>
+          <p className="eyebrow eyebrow--dark">In Issue 01 · Page 02</p>
+          <h2 id="featured-title">A featured poem<br />by the Creator</h2>
+          <p className="featured-poem-name"><span>The poem</span> Fly</p>
+          <p className="featured-summary">
+            <em>Fly</em> waits inside the issue, unexcerpted and exactly where it
+            belongs. Meet it on page 02, in full and in context.
+          </p>
+          <p className="byline">Written by Adeosun Oluwatunmise</p>
+          <DownloadButton compact className="featured-download" />
         </div>
       </section>
 
       <section className="winners-section">
         <div className="winners-heading" data-reveal="up">
           <p className="eyebrow">The top three entries</p>
-          <h2>Three voices.<br />Three forms.<br />One theme.</h2>
+          <h2>Three voices<br />Three forms<br />One theme</h2>
         </div>
         <div className="winner-list" data-reveal="list">
           <article>
@@ -179,8 +189,7 @@ export default function Home() {
       <section className="preview-section" aria-labelledby="preview-title">
         <div className="preview-heading" data-reveal="up">
           <p className="eyebrow eyebrow--dark">A look inside</p>
-          <h2 id="preview-title">Made to be lingered over.</h2>
-          <p>Three forms of storytelling, held together by the quiet work of becoming.</p>
+          <h2 id="preview-title">Three forms of story telling</h2>
         </div>
         <div className="page-fan" data-reveal="fan">
           {previewPages.map((page, index) => (
@@ -196,28 +205,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="about-section" id="about">
-        <div className="about-mark" aria-hidden="true" data-reveal="scale">
-          <Image src="/magazine/mark.jpg" alt="" width={1000} height={1000} />
-        </div>
-        <div className="about-copy" data-reveal="up">
-          <p className="eyebrow">Why Where Dreams Live exists</p>
-          <h2>A home for the words you almost kept to yourself.</h2>
-          <p>
-            Where Dreams Live is a literary home for writers who carry the
-            stories that need somewhere to bloom. Issue by issue, we make room
-            for honest work, fresh voices, and the courage to share.
-          </p>
-          <a className="text-link" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
-            Follow the journey on Instagram <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </section>
-
       <section className="final-cta">
         <div className="final-cta-content" data-reveal="up">
           <p className="eyebrow">Issue 01 · Becoming</p>
-          <h2>Start reading.<br />See what stays.</h2>
+          <h2>Start reading</h2>
           <DownloadButton compact />
         </div>
       </section>

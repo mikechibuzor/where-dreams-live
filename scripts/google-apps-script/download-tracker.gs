@@ -47,7 +47,7 @@ function doPost(event) {
   }
 
   const lock = LockService.getScriptLock();
-  if (!lock.tryLock(5_000)) {
+  if (!lock.tryLock(5000)) {
     return jsonResponse_({ ok: false, error: "Tracker is busy." });
   }
 
