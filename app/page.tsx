@@ -44,10 +44,10 @@ export default function Home() {
         <span className="hero-issue" aria-hidden="true">01</span>
         <div className="hero-copy">
           <p className="eyebrow">A magazine for lovers of creative writing</p>
-          <h1>Stories that stay<br />with you.</h1>
+          <h1>Stories that stay<br />with you</h1>
           <p className="hero-intro">
             <em>Becoming</em> is our first collection of poems, flash fiction,
-            and stories from writers finding the courage to become.
+            and stories from writers finding the courage to become
           </p>
           <DownloadButton />
         </div>
@@ -73,7 +73,7 @@ export default function Home() {
           <div className="letter-heading" data-reveal="up">
             <span className="section-index">01</span>
             <p className="eyebrow eyebrow--dark">A letter from the editor</p>
-            <h2>For stories that finally have somewhere to go.</h2>
+            <h2>For stories that finally have somewhere to go</h2>
           </div>
           <div className="letter-copy" data-reveal="up">
             <p className="drop-cap">
@@ -103,7 +103,6 @@ export default function Home() {
                 priority
               />
             </div>
-            <blockquote>“A whisper<br />of an idea.”</blockquote>
             <figcaption>
               <span>Adeosun Oluwatunmise Ifeoluwa</span>
               <span>Editor &amp; creator</span>
@@ -115,10 +114,9 @@ export default function Home() {
       <section className="contents-section" id="inside">
         <div className="contents-intro" data-reveal="up">
           <p className="eyebrow">Inside Issue 01</p>
-          <h2>Words in the<br />middle of becoming.</h2>
+          <h2>Twenty winning entries</h2>
           <p>
-            Twenty winning entries across poetry, flash fiction, and short
-            stories — gathered into one generous first issue.
+            Poetry, flash fiction, and short stories gathered into one issue.
           </p>
         </div>
         <ol className="contents-list" data-reveal="list">
@@ -147,7 +145,7 @@ export default function Home() {
           <blockquote>
             “You take what seems to be your first breath,<br />
             a new layer of skin on you.<br />
-            You test your wings — once, twice.<br />
+            You test your wings, once, twice.<br />
             Then you fly.”
           </blockquote>
           <p className="byline">By Adeosun Oluwatunmise</p>
@@ -231,7 +229,7 @@ export default function Home() {
           </span>
           <span>Where Dreams Live</span>
         </a>
-        <p>Stories that stay with you.</p>
+        <p>Stories that stay with you</p>
         <p>© 2026 Where Dreams Live</p>
       </footer>
     </main>

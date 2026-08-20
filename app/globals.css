@@ -261,28 +261,6 @@ h1 {
   width: 100%;
 }
 .editor-portrait:hover .portrait-media img { transform: scale(1.13) translateY(-5px); }
-.editor-portrait blockquote {
-  color: var(--violet-deep);
-  font-family: var(--serif);
-  font-size: clamp(30px, 2.8vw, 46px);
-  letter-spacing: -.05em;
-  line-height: .86;
-  margin: 0;
-  position: absolute;
-  right: -2%;
-  text-align: right;
-  top: -29%;
-}
-.editor-portrait blockquote::before {
-  background: var(--violet);
-  content: "";
-  display: block;
-  height: 1px;
-  margin: 0 0 24px auto;
-  transition: width .8s cubic-bezier(.2,.8,.2,1);
-  width: 54px;
-}
-.editor-portrait:hover blockquote::before { width: 100px; }
 .editor-portrait figcaption {
   align-items: center;
   bottom: -75px;
@@ -502,7 +480,6 @@ footer p:last-child { justify-self: end; }
   .editor-visual { min-height: 560px; padding: 95px 10vw 125px; width: 100%; }
   .portrait-petal { transform: translate(-54%, -50%) rotate(-12deg) scale(1.18); width: min(105vw, 470px); }
   .editor-portrait { max-width: 350px; min-height: 0; }
-  .editor-portrait blockquote { font-size: clamp(31px, 9vw, 42px); right: -1%; top: -25%; }
   .editor-portrait figcaption { align-items: flex-start; bottom: -72px; flex-direction: column; gap: 7px; left: 8px; right: 8px; }
 
   .contents-section, .winners-section { display: block; padding: 90px 7vw; }
