@@ -145,7 +145,7 @@ export default function Home() {
         <div className="featured-copy" data-reveal="up">
           <p className="eyebrow eyebrow--dark">In Issue 01 · Page 02</p>
           <h2 id="featured-title">A featured poem<br />by the Creator</h2>
-          <p className="featured-poem-label">The poem</p>
+          <p className="featured-poem-label">Fly</p>
         </div>
       </section>
 
