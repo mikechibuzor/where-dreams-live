@@ -1,74 +1,57 @@
-import { env } from "cloudflare:workers";
-
 const ISSUE_SLUG = "issue-01";
+const TRACKING_TIMEOUT_MS = 3_000;
 
-async function ensureDownloadsTable(database: D1Database) {
-  await database
-    .prepare(`
-      CREATE TABLE IF NOT EXISTS issue_downloads (
-        issue_slug TEXT PRIMARY KEY NOT NULL,
-        download_count INTEGER NOT NULL DEFAULT 0,
-        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-      )
-    `)
-    .run();
-}
-
-function unavailableResponse() {
-  return Response.json(
-    { count: null, tracking: "unavailable" },
-    { status: 503, headers: { "cache-control": "no-store" } },
-  );
-}
-
-export async function GET() {
-  try {
-    const database = env.DB;
-    if (!database) return unavailableResponse();
-
-    await ensureDownloadsTable(database);
-    const row = await database
-      .prepare("SELECT download_count FROM issue_downloads WHERE issue_slug = ?")
-      .bind(ISSUE_SLUG)
-      .first<{ download_count: number }>();
-
-    return Response.json(
-      { count: row?.download_count ?? 0 },
-      { headers: { "cache-control": "no-store" } },
-    );
-  } catch {
-    return unavailableResponse();
-  }
-}
+type DownloadPayload = {
+  issue?: string;
+};
 
 export async function POST(request: Request) {
-  try {
-    const database = env.DB;
-    if (!database) return unavailableResponse();
+  const payload = (await request.json().catch(() => ({}))) as DownloadPayload;
 
-    const payload = (await request.json().catch(() => ({}))) as { issue?: string };
-    if (payload.issue && payload.issue !== ISSUE_SLUG) {
-      return Response.json({ error: "Unknown issue" }, { status: 400 });
-    }
-
-    await ensureDownloadsTable(database);
-    const row = await database
-      .prepare(`
-        INSERT INTO issue_downloads (issue_slug, download_count)
-        VALUES (?, 1)
-        ON CONFLICT(issue_slug) DO UPDATE SET
-          download_count = download_count + 1,
-          updated_at = CURRENT_TIMESTAMP
-        RETURNING download_count
-      `)
-      .bind(ISSUE_SLUG)
-      .first<{ download_count: number }>();
-
-    return Response.json(
-      { count: row?.download_count ?? 1 },
-      { headers: { "cache-control": "no-store" } },
-    );
-  } catch {
-    return unavailableResponse();
+  if (payload.issue && payload.issue !== ISSUE_SLUG) {
+    return Response.json({ error: "Unknown issue" }, { status: 400 });
   }
+
+  const webhookUrl = process.env.DOWNLOAD_SHEET_WEBHOOK_URL;
+  const trackingSecret = process.env.DOWNLOAD_SHEET_SECRET;
+
+  if (!webhookUrl || !trackingSecret) {
+    console.warn("Download tracking is not configured.");
+    return new Response(null, { status: 204 });
+  }
+
+  try {
+    const trackingResponse = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        secret: trackingSecret,
+        timestamp: new Date().toISOString(),
+        issue: ISSUE_SLUG,
+        requestId: crypto.randomUUID(),
+        referrer: request.headers.get("referer") ?? "",
+        country: request.headers.get("x-vercel-ip-country") ?? "",
+        userAgent: request.headers.get("user-agent") ?? "",
+      }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(TRACKING_TIMEOUT_MS),
+    });
+
+    if (!trackingResponse.ok) {
+      console.error(`Download tracking failed with status ${trackingResponse.status}.`);
+    } else {
+      const trackingResult = (await trackingResponse.json().catch(() => null)) as
+        | { ok?: boolean; error?: string }
+        | null;
+
+      if (!trackingResult?.ok) {
+        console.error("Download tracking was rejected by Google Apps Script.");
+      }
+    }
+  } catch (error) {
+    console.error("Download tracking request failed.", error);
+  }
+
+  // Analytics must never block or break the visitor's PDF download.
+  return new Response(null, { status: 204 });
 }
